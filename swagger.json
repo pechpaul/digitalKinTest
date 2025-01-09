@@ -1,0 +1,56 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Digitalkin",
+    "description": "Test",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/agents": {
+      "get": {
+        "description": "List all agents",
+        "tags": ["agents"],
+        "responses": {}
+      },
+      "post": {
+        "description": "Create a new agent",
+        "tags": ["agents"],
+
+        "responses": {}
+      }
+    },
+    "/agents/{agentId}": {
+      "get": {
+        "description": "Get an agent",
+        "tags": ["agents"],
+
+        "responses": {}
+      },
+      "put": {
+        "description": "Update an agent",
+        "tags": ["agents"],
+
+        "responses": {}
+      },
+      "delete": {
+        "description": "Delete an agent",
+        "tags": ["agents"],
+        "responses": {}
+      }
+    },
+    "/conversations": {
+      "post": {
+        "description": "Create a new conversation",
+        "tags": ["conversations"],
+        "responses": {}
+      }
+    },
+    "/conversations/{conversationId}/messages": {
+      "post": {
+        "description": "Send message to a conversation",
+        "tags": ["conversations"],
+        "responses": {}
+      }
+    }
+  }
+}
