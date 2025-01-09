@@ -15,41 +15,152 @@
       "post": {
         "description": "Create a new agent",
         "tags": ["agents"],
-
-        "responses": {}
+        "responses": {},
+        "requestBody":{
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "nom", "description", "systemPrompt"
+              ],
+              "properties": {
+                "nom" : {
+                  "type": "string"
+                },
+                "description" : {
+                  "type": "string"
+                },
+                "systemPrompt" : {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+        }
       }
     },
     "/agents/{agentId}": {
       "get": {
         "description": "Get an agent",
         "tags": ["agents"],
-
+        "parameters": [{
+          "in": "path",
+          "name": "agentId",
+          "schema": {
+            "type": "integer"
+          }
+        }],
         "responses": {}
       },
       "put": {
         "description": "Update an agent",
         "tags": ["agents"],
-
-        "responses": {}
+        "responses": {},
+        "parameters": [{
+          "in": "path",
+          "name": "agentId",
+          "schema": {
+            "type": "integer"
+          }
+        }],
+        "requestBody":{
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "nom", "description", "systemPrompt", "statut"
+                ],
+                "properties": {
+                  "nom" : {
+                    "type": "string"
+                  },
+                  "description" : {
+                    "type": "string"
+                  },
+                  "systemPrompt" : {
+                    "type": "string"
+                  },
+                  "statut" : {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "description": "Delete an agent",
         "tags": ["agents"],
-        "responses": {}
+        "responses": {},
+        "parameters": [{
+          "in": "path",
+          "name": "agentId",
+          "schema": {
+            "type": "integer"
+          }
+        }]
       }
     },
     "/conversations": {
       "post": {
         "description": "Create a new conversation",
         "tags": ["conversations"],
-        "responses": {}
+        "responses": {},
+        "requestBody":{
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "agentId", "message"
+                ],
+                "properties": {
+                  "agentId" : {
+                    "type": "integer"
+                  },
+                  "message" : {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/conversations/{conversationId}/messages": {
       "post": {
         "description": "Send message to a conversation",
         "tags": ["conversations"],
-        "responses": {}
+        "responses": {},
+        "parameters": [{
+          "in": "path",
+          "name": "conversationId",
+          "schema": {
+            "type": "integer"
+          }
+        }],
+        "requestBody":{
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "message"
+                ],
+                "properties": {
+                  "message" : {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
