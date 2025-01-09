@@ -13,4 +13,4 @@ la config pour la connection est trouvable dans ./src/services/databseService ou
 pour demarer:
 ```bash
 npm i && npm start 
-```bash
+```
