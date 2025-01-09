@@ -14,3 +14,6 @@ pour demarer:
 ```bash
 npm i && npm start 
 ```
+
+lapplication peut etre testé directment sur swagger http://localhost:3000/api-docs/
+ou par postman
