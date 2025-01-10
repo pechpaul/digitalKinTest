@@ -5,12 +5,15 @@ exports.getConversations = async ()=>{
     return await surreal.getDb.select("conversation")
 }
 
-exports.startConversation = async (agentId, message) => {
-    const conversationId = (await databaseService.query(`INSERT INTO conversations (agent_id)
-                                 VALUES (${agentId}) RETURNING id;`
-        )).rows[0].id
-    await databaseService.query(`INSERT INTO messages (conversation_id, message)
-                                 VALUES (${conversationId}, '${message}');`
-    )
-    return conversationId
+exports.startConversation = async (agentId, userMessage) => {
+    const conversation = surreal.getDb.create("conversation")
+    await db.insert_relation('assign', {
+        in: new RecordId('agent', agentId),
+        out: new RecordId('conversation', conversation.id),
+    });
+    const message = surreal.getDb.create("message", {text: userMessage})
+    await db.insert_relation('said', {
+        in: new RecordId('conversation', conversation.id),
+        out: new RecordId('message', message.id),
+    });
 }
