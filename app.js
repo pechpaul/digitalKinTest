@@ -3,9 +3,9 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const agentsRouter = require('./src/routes/agents');
 const conversationsRouter = require('./src/routes/conversations');
-const databaseService = require('./src/services/databaseService')
+const surreal = require('./src/utils/surreal.js')
 
-databaseService.connectToDb()
+surreal.connectToDb()
 const app = express();
 app.use(express.json());
 app.use('/agents', agentsRouter);

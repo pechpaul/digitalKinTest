@@ -1,41 +1,23 @@
-const databaseService = require('./databaseService')
+const surreal = require('../utils/surreal')
+const { RecordId } = require('surrealdb');
 
 exports.getAgents = async ()=>{
-    const response = await databaseService.query("SELECT * from agents")
-    return response.rows
+    return await surreal.getDb.select("agent")
 }
 
 exports.addAgent = (newAgent)=>{
-    return databaseService.query(`INSERT INTO agents (nom, description, "systemPrompt", status) VALUES 
-                       ('${newAgent.nom}', '${newAgent.description}', '${newAgent.systemPrompt}', 'actif')`
-    )
+    return surreal.getDb.create('agent', newAgent)
 }
 
 exports.getAgent = (agentId)=>{
-    return  databaseService.query(`SELECT
-        1
-        FROM agents
-    WHERE
-        agents.id = ${agentId}
-    `)
+    return surreal.getDb.create(new RecordId('agent', agentId))
 }
 
 exports.updateAgent = (agentId, updatedAgent)=>{
-    return  databaseService.query(`UPDATE agents
-    SET (
-        '${updatedAgent.nom}', 
-        '${updatedAgent.description}', 
-        '${updatedAgent.systemPrompt}', 
-        '${updatedAgent.status}'
-        )
-    WHERE
-        agents.id = ${agentId}
-    `)
+    return surreal.getDb.update(new RecordId('agent', agentId), updatedAgent)
 }
 
-exports.deleteAgent = (agentId)=>{return  databaseService.query(
-    `DELETE FROM agents
-    WHERE
-        agents.id = ${agentId}
-    `)
+exports.deleteAgent = (agentId)=>{
+    return surreal.getDb.delete(new RecordId('agent', agentId))
+
 }

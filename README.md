@@ -1,1 +1,2 @@
-# digitalKinTest
+# digitalKin
+

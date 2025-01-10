@@ -1,8 +1,8 @@
-const databaseService = require('./databaseService')
+const surreal = require('../utils/surreal')
+const { RecordId } = require('surrealdb');
 
 exports.getConversations = async ()=>{
-    const response = await databaseService.query("SELECT * from conversations")
-    return response.rows
+    return await surreal.getDb.select("conversation")
 }
 
 exports.startConversation = async (agentId, message) => {
